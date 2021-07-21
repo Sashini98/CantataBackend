@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, Sequelize) => {
     const Admin = sequelize.define("admin", {
         adminid: {
@@ -16,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         password: {
             type: Sequelize.STRING
-        },
+        }
          });
 
     return Admin;

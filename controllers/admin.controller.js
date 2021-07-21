@@ -45,6 +45,21 @@ exports.findOne = (req, res) => {
         });
 };
 
+exports.findAll = (req, res) => {
+    console.log(req.body);
+    // const id = req.params.adminid;
+
+    Admin.findByPk(id)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Admin with this ID=" + id
+            });
+        });
+};
+
 
 // Update a User by the id in the request
 exports.update = (req, res) => {
@@ -60,13 +75,13 @@ exports.update = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot update user with admin ID=${un}.`
+                    message: `Cannot update admin with ID=${un}.`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating user with admin ID=" + adminid
+                message: "Error updating admin with ID=" + adminid
             });
         });
 };
@@ -81,17 +96,17 @@ exports.delete = (req, res) => {
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "User was deleted successfully!"
+                    message: "Admin was deleted successfully!"
                 });
             } else {
                 res.send({
-                    message: `Cannot delete user with admin ID=${un}. Maybe user was not found!`
+                    message: `Cannot delete admin with ID=${un}. Maybe admin was not found!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete user with admin ID=" + un
+                message: "Could not delete admin with ID=" + un
             });
         });
 };
