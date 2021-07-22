@@ -24,11 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to cantata." });
+    res.json({ message: "Welcome to Cantata." });
 });
 
 //Import routes
-require("./routes/admin.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/auth.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;

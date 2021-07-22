@@ -1,17 +1,16 @@
-module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
-    DB: "test",
-    dialect: "mysql",
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  };
-
+const mysql = require('mysql');
+// create here mysql connection
+const dbConn = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'cantata'
+});
+dbConn.connect(function(error){
+    if(error) throw error;
+    console.log('Database Connected Successfully!!!');
+})
+module.exports = dbConn;
 
 //Legend
 // max: maximum number of connection in pool
