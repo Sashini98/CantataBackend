@@ -17,8 +17,16 @@ exports.checkUser = (req, res) => {
 	UserModel.validate(req.body, (err, user) => {
 		// if (err) res.send(err);
 		// console.log("single user data", user);
-		if (err) res.send(err);
-		res.status(200).send({ user });
+		if (err) {
+			res.status(404).send({ message: "failed", data: null });
+			return;
+		} else {
+			if (user) {
+				res.status(200).send({ message: "success", data: user[0] });
+			} else {
+				res.status(404).send({ message: "failed", data: null });
+			}
+		}
 	});
 };
 
