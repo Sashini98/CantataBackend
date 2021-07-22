@@ -22,3 +22,15 @@ exports.checkUser = (req, res)=>{
     })
 }
 
+exports.getActiveUsers = (req, res)=> {
+    //console.log('here all employees list');
+    UserModel.getActiveUsers((err, users) =>{
+        console.log('We are here');
+        if(err)
+        res.send(err);
+        console.log('Users', users);
+        res.send(users)
+    })
+}
+ 
+

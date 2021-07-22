@@ -26,4 +26,17 @@ User.checkUser = (user_id, result)=>{
     })
 }
 
+// get all active users
+User.getActiveUsers = (result)=>{
+    dbConn.query('SELECT * FROM user WHERE ActiveStatus LIKE 1', (err, res)=>{
+        if(err){
+            console.log('Error while fetching users', err);
+            result(null, err);
+        }else{
+            console.log('Employees fetched succesfully', err);
+            result(null, res);
+        }
+    })
+}
+
 module.exports = User;
