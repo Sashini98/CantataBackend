@@ -22,7 +22,6 @@ exports.checkUser = (req, res) => {
 			return;
 		} else {
 			if (user) {
-				console.log('empl',user)
 				res.status(200).send({ message: "success", data: user[0] });
 			} else {
 				res.status(404).send({ message: "failed", data: null });
@@ -37,6 +36,16 @@ exports.getActiveUsers = (req, res) => {
 		// console.log("We are here");
 		if (err) res.send(err);
 		console.log("Users", users);
-		res.status(200).send({ users }); //did some changes here
+		res.send(users); //did some changes here
+	});
+};
+
+exports.getDeactiveUsers = (req, res) => {
+	//console.log('here all employees list');
+	UserModel.getDeactiveUsers((err, users) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+		console.log("Users", users);
+		res.send(users); //did some changes here
 	});
 };

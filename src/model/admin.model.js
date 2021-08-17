@@ -57,8 +57,6 @@ User.getActiveUsers = (result) => {
 	});
 };
 
-
-// get all deactive users
 User.getDeactiveUsers = (result) => {
 	dbConn.query("SELECT * FROM user WHERE ActiveStatus LIKE 0", (err, res) => {
 		if (err) {
