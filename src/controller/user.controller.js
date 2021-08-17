@@ -35,7 +35,6 @@ exports.getActiveUsers = (req, res) => {
 	UserModel.getActiveUsers((err, users) => {
 		// console.log("We are here");
 		if (err) res.send(err);
-		console.log("Users", users);
 		res.send(users); //did some changes here
 	});
 };
@@ -45,7 +44,15 @@ exports.getDeactiveUsers = (req, res) => {
 	UserModel.getDeactiveUsers((err, users) => {
 		// console.log("We are here");
 		if (err) res.send(err);
-		console.log("Users", users);
 		res.send(users); //did some changes here
 	});
 };
+
+exports.getUserByEmail = (req, res)=>{
+    //console.log('get emp by id');
+    UserModel.getUserByEmail(req.params.email, (err, user)=>{
+        if(err)
+        res.send(err);
+        res.send(user);
+    })
+}

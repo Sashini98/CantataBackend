@@ -51,7 +51,7 @@ User.getActiveUsers = (result) => {
 			console.log("Error while fetching users", err);
 			result(null, err);
 		} else {
-			console.log("Employees fetched succesfully", err);
+			console.log("Active users fetched succesfully", err);
 			result(null, res);
 		}
 	});
@@ -65,10 +65,22 @@ User.getDeactiveUsers = (result) => {
 			console.log("Error while fetching users", err);
 			result(null, err);
 		} else {
-			console.log("Employees fetched succesfully", err);
+			console.log("Deactive users fetched succesfully", err);
 			result(null, res);
 		}
 	});
 };
 
+
+User.getUserByEmail = (email, result)=>{
+    dbConn.query('SELECT * FROM user WHERE Email=?', email, (err, res)=>{
+        if(err){
+            console.log('Error while fetching user by email', err);
+            result(null, err);
+        }else{
+			console.log('User earch is succesful');
+            result(null, res);
+        }
+    })
+}
 module.exports = User;

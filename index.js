@@ -22,9 +22,11 @@ app.get('/', (req, res)=>{
 });
 // import employee routes
 const userRoutes = require('./src/routes/user.route');
+const adminRoutes = require('./src/routes/admin.route');
  
 // create employee routes
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/admin' ,adminRoutes);
  
 // listen to the port
 app.listen(port, ()=>{
