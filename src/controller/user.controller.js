@@ -22,6 +22,7 @@ exports.checkUser = (req, res) => {
 			return;
 		} else {
 			if (user) {
+				console.log('empl',user)
 				res.status(200).send({ message: "success", data: user[0] });
 			} else {
 				res.status(404).send({ message: "failed", data: null });
