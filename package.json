@@ -16,6 +16,7 @@
 		"js-base64": "^3.6.1",
 		"mysql": "^2.18.1",
 		"mysql2": "^2.2.5",
+		"nodemon": "^2.0.12",
 		"random-string": "^0.2.0",
 		"sequelize": "^6.6.5"
 	}
