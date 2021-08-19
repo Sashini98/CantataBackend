@@ -9,7 +9,7 @@ var ReportedUser = function (reporteduser) {
 };
 
 ReportedUser.getReportCount = (result) => {
-	dbConn.query("SELECT UserId,COUNT(UserId) as Count FROM reportedusers GROUP BY UserId", (err, res) => {
+	dbConn.query("SELECT user.Email,COUNT(reportedusers.UserId) as Count FROM reportedusers INNER JOIN user ON reportedusers.UserId=user.UserId GROUP BY reportedusers.UserId", (err, res) => {
 		if (err) {
 			console.log("Error while fetching users", err);
 			result(null, err);
