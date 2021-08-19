@@ -35,7 +35,7 @@ exports.getAdmin= (req, res)=>{
     AdminModel.getAdmin(req.params.admin_id, (err, admin)=>{
         if(err)
         res.send(err);
-        console.log('single admin data',admin);
+        // console.log('single admin data',admin);
         res.send(admin);
     })
 }
