@@ -11,6 +11,8 @@ router.post("/addnotification", notificationController.createNotification);
 
 router.get('/getrepusercount',reporteduserController.getReportCount);
 router.get('/getreplyriccount',reportedlyricController.getReportCount);
+router.get('/getreplyric/:lyric_id',reportedlyricController.getReportLyrics);
+
 
 
 router.post("/checkadmin", adminController.checkAdmin);

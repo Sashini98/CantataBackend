@@ -14,11 +14,25 @@ ReportedLyric.getReportCount = (result) => {
 			console.log("Error while fetching reported lyrics", err);
 			result(null, err);
 		} else {
-			console.log("Reported lyrics fetched succesfully", err);
+			console.log("Done", err);
 			result(null, res);
 		}
 	});
 };
+
+ReportedLyric.getReportLyrics = (lyric_id,result) => {
+	dbConn.query("SELECT ReportedBy,Reason FROM reportedlyrics WHERE LyricId=?",lyric_id, (err, res) => {
+		if (err) {
+			console.log("Error while fetching reported lyrics", err);
+			result(null, err);
+		} else {
+			console.log("Reported lyrics fetched succesfully",lyric_id, err);
+			result(null, res);
+		}
+	});
+};
+
+
 
 
 module.exports = ReportedLyric;

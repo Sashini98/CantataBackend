@@ -20,6 +20,17 @@ ReportedUser.getReportCount = (result) => {
 	});
 };
 
+ReportedUser.getReports = (user_id,result) => {
+	dbConn.query("SELECT ReportedBy,Reason FROM reportedusers WHERE UserId=?",user_id, (err, res) => {
+		if (err) {
+			console.log("Error while fetching reported users", err);
+			result(null, err);
+		} else {
+			console.log("Reported users fetched succesfully", err);
+			result(null, res);
+		}
+	});
+};
 
 
 module.exports = ReportedUser;
