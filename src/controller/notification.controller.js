@@ -8,7 +8,7 @@ exports.createNotification = (req, res) =>{
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
         res.send(400).send({success: false, message: 'Please fill all fields'});
     }else{
-        EmployeeModel.createNotification(notificationReqData, (err, notification)=>{
+        NotificationModel.createNotification(notificationReqData, (err, notification)=>{
             if(err)
             res.send(err);
             res.json({status: true, message: 'Notification Created Successfully', data: notification.insertId})
