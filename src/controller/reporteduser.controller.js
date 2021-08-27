@@ -11,3 +11,12 @@ exports.getReportCount = (req, res) => {
 		res.send(reporteduser); 
 	});
 };
+
+exports.getReports = (req, res)=>{
+    // console.log('get replyric id');
+    ReportedUserModel.getReports(req.params.user_id, (err, repuser)=>{
+        if(err) res.send(err);		
+        console.log('rep data',repuser);
+        res.send(repuser);
+    })
+}
