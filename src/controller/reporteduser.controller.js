@@ -20,3 +20,13 @@ exports.getReports = (req, res)=>{
         res.send(repuser);
     })
 }
+
+exports.getRepUserCount = (req, res) => {
+	// console.log('get replyriccount');
+	ReportedUserModel.getRepUserCount((err, reports) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        // console.log('rep cont data',reportedlyric);
+		res.send(reports); 
+	});
+};

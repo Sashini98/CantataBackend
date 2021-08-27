@@ -20,3 +20,13 @@ exports.getReportLyrics = (req, res)=>{
         res.send(replyric);
     })
 }
+
+exports.getLyricCount = (req, res) => {
+	// console.log('get replyriccount');
+	ReportedLyricsModel.getLyricCount((err, reports) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        // console.log('rep cont data',reportedlyric);
+		res.send(reports); 
+	});
+};

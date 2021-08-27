@@ -20,3 +20,14 @@ exports.getReportCover = (req, res)=>{
         res.send(repcover);
     })
 }
+
+exports.getCoverCount = (req, res) => {
+	// console.log('get replyriccount');
+	ReportedCoversModel.getCoverCount((err, reports) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        // console.log('rep cont data',reportedlyric);
+		res.send(reports); 
+	});
+};
+

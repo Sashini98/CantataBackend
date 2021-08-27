@@ -9,7 +9,7 @@ var ReportedUser = function (reporteduser) {
 };
 
 ReportedUser.getReportCount = (result) => {
-	dbConn.query("SELECT user.Email,reportedusers.UserId,COUNT(reportedusers.UserId) as Count FROM reportedusers INNER JOIN user ON reportedusers.UserId=user.UserId GROUP BY reportedusers.UserId", (err, res) => {
+	dbConn.query("SELECT user.Email,reportedusers.UserId,COUNT(reportedusers.UserId) as Count FROM reportedusers INNER JOIN user ON reportedusers.UserId=user.UserId WHERE reportedusers.Status=1 GROUP BY reportedusers.UserId", (err, res) => {
 		if (err) {
 			console.log("Error while fetching users", err);
 			result(null, err);
@@ -31,6 +31,19 @@ ReportedUser.getReports = (user_id,result) => {
 		}
 	});
 };
+
+ReportedUser.getRepUserCount = (result) => {
+	dbConn.query("SELECT (SELECT COUNT(ReportId) FROM reportedusers)AS Tot, (SELECT COUNT(ReportId) FROM reportedusers WHERE STATUS=1) AS Active, (SELECT COUNT(ReportId) FROM reportedusers WHERE STATUS=0)AS Deactive", (err, res) => {
+		if (err) {
+			console.log("Error while fetching counts", err);
+			result(null, err);
+		} else {
+			console.log("Done", err);
+			result(null, res);
+		}
+	});
+};
+
 
 
 module.exports = ReportedUser;

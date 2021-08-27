@@ -9,7 +9,7 @@ var ReportedCover = function (reportedcover) {
 };
 
 ReportedCover.getReportCount = (result) => {
-	dbConn.query("SELECT user.Email,reportedcover.CoverId,COUNT(reportedcover.CoverId) as Count FROM reportedcover JOIN cover ON reportedcover.CoverId=cover.CoverId JOIN user ON cover.UserId=user.UserId GROUP BY reportedcover.CoverId", (err, res) => {
+	dbConn.query("SELECT user.Email,reportedcover.CoverId,COUNT(reportedcover.CoverId) as Count FROM reportedcover JOIN cover ON reportedcover.CoverId=cover.CoverId JOIN user ON cover.UserId=user.UserId WHERE reportedcover.Status=1 GROUP BY reportedcover.CoverId", (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported cover", err);
 			result(null, err);
@@ -32,6 +32,19 @@ ReportedCover.getReportCover = (cover_id,result) => {
 		}
 	});
 };
+
+ReportedCover.getCoverCount = (result) => {
+	dbConn.query("SELECT (SELECT COUNT(ReportId) FROM reportedcover)AS Tot, (SELECT COUNT(ReportId) FROM reportedcover WHERE STATUS=1) AS Active, (SELECT COUNT(ReportId) FROM reportedcover WHERE STATUS=0)AS Deactive", (err, res) => {
+		if (err) {
+			console.log("Error while fetching counts", err);
+			result(null, err);
+		} else {
+			console.log("Done", err);
+			result(null, res);
+		}
+	});
+};
+
 
 
 module.exports = ReportedCover;
