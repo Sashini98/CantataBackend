@@ -19,9 +19,9 @@ router.get('/getrepcovercount',reportedcoverController.getReportCount);
 router.get('/getrepcover/:cover_id',reportedcoverController.getReportCover);
 
 
-
-
 router.post("/checkadmin", adminController.checkAdmin);
 router.get('/getadmin',adminController.getAdmin);
+router.get('/gettot',adminController.getCounts);
+
 
 module.exports = router;

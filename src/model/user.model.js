@@ -83,4 +83,16 @@ User.getUserByEmail = (email, result)=>{
         }
     })
 }
+
+User.getUserCount = (result) => {
+	dbConn.query("SELECT (SELECT COUNT(user.UserId) FROM user ) AS Users, (SELECT (SELECT COUNT(user.UserId) FROM user WHERE ActiveStatus=1)) AS Active, (SELECT (SELECT COUNT(user.UserId) FROM user WHERE ActiveStatus=0)) AS Deactive", (err, res) => {
+		if (err) {
+			console.log("Error while fetching user count", err);
+			result(null, err);
+		} else {
+			console.log("User count fetched succesfully", err);
+			result(null, res);
+		}
+	});
+};
 module.exports = User;

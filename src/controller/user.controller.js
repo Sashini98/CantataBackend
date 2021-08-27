@@ -56,3 +56,13 @@ exports.getUserByEmail = (req, res)=>{
         res.send(user);
     })
 }
+
+exports.getUserCount = (req, res) => {
+	//console.log('here all employees list');
+	UserModel.getUserCount((err, usercnt) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        console.log('counts',usercnt);
+		res.send(usercnt); //did some changes here
+	});
+};

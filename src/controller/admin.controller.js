@@ -39,3 +39,14 @@ exports.getAdmin= (req, res)=>{
         res.send(admin);
     })
 }
+
+exports.getCounts = (req, res) => {
+	//console.log('here all employees list');
+	AdminModel.getCounts((err, cnt) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        console.log('counts',cnt);
+		res.send(cnt); //did some changes here
+	});
+};
+
