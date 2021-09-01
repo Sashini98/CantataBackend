@@ -95,4 +95,30 @@ User.getUserCount = (result) => {
 		}
 	});
 };
+
+
+User.activateUser = (email, result)=>{
+    dbConn.query('Update user SET ActiveStatus=1 WHERE Email=?', email, (err, res)=>{
+        if(err){
+            console.log('Error while activating user ', err);
+            result(null, err);
+        }else{
+			console.log('User activated');
+            result(null, res);
+        }
+    })
+}
+
+User.deactivateUser = (email, result)=>{
+    dbConn.query('Update user SET ActiveStatus=0 WHERE Email=?', email, (err, res)=>{
+        if(err){
+            console.log('Error while deactivating user ', err);
+            result(null, err);
+        }else{
+			console.log('User deactivated');
+            result(null, res);
+        }
+    })
+}
+ 
 module.exports = User;

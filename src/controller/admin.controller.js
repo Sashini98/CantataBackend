@@ -50,3 +50,19 @@ exports.getCounts = (req, res) => {
 	});
 };
 
+exports.editDetails = (req, res) =>{
+    const adminReqData = new AdminModel(req.body);
+    console.log('notificationReqData', adminReqData);
+    // check null
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.send(400).send({success: false, message: 'Please fill all fields'});
+    }else{
+        AdminModel.editDetails(adminReqData, (err, admin)=>{
+            if(err)
+            res.send(err);
+            res.json({status: true, message: 'Notification Created Successfully', data: admin})
+        })
+    }
+}
+ 
+

@@ -8,5 +8,8 @@ router.get("/deactive", userController.getDeactiveUsers);
 router.post("/checkuser", userController.checkUser);
 router.get("/usercount", userController.getUserCount);
 router.get('/searchUser/:email',userController.getUserByEmail);
+router.get('/activateUser/:email',userController.activateUser);
+router.get('/deactivateUser/:email',userController.deactivateUser);
+
 
 module.exports = router;

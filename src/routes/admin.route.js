@@ -28,6 +28,8 @@ router.get('/getcovercounts',reportedcoverController.getCoverCount);
 router.post("/checkadmin", adminController.checkAdmin);
 router.get('/getadmin',adminController.getAdmin);
 router.get('/gettot',adminController.getCounts);
+router.post('/editdetails',adminController.editDetails);
+
 
 
 module.exports = router;

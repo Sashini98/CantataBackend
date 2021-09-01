@@ -53,6 +53,7 @@ exports.getUserByEmail = (req, res)=>{
     UserModel.getUserByEmail(req.params.email, (err, user)=>{
         if(err)
         res.send(err);
+		console.log(user)
         res.send(user);
     })
 }
@@ -66,3 +67,19 @@ exports.getUserCount = (req, res) => {
 		res.send(usercnt); //did some changes here
 	});
 };
+
+exports.activateUser = (req, res)=>{
+    //console.log('get emp by id');
+    UserModel.activateUser(req.params.email, (err, user)=>{
+        if(err)
+        res.send(err);
+    })
+}
+
+exports.deactivateUser = (req, res)=>{
+    //console.log('get emp by id');
+    UserModel.deactivateUser(req.params.email, (err, user)=>{
+        if(err)
+        res.send(err);
+    })
+}

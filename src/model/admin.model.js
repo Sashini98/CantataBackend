@@ -3,7 +3,7 @@ var dbConn = require("../../config/db.config");
 var Admin = function (admin) {
 	this.admin_id = admin.admin_id;
 	this.email = admin.email;
-	this.fname = admin.fname;    
+	this.fname = admin.fname;
 	this.lname = admin.lname;
 	this.password = admin.password;
 };
@@ -24,7 +24,7 @@ Admin.validate = (data, result) => {
 	);
 };
 
-Admin.checkAdmin= (user_id, result) => {
+Admin.checkAdmin = (user_id, result) => {
 	dbConn.query(
 		"SELECT * FROM admin WHERE AdminId LIKE ?",
 		user_id + "%",
@@ -38,16 +38,16 @@ Admin.checkAdmin= (user_id, result) => {
 		}
 	);
 };
-Admin.getAdmin = (admin_id, result)=>{
-    dbConn.query('SELECT * FROM admin WHERE AdminId=1', admin_id, (err, res)=>{
-        if(err){
-            console.log('Error while fetching admin by id', err);
-            result(null, err);
-        }else{
+Admin.getAdmin = (admin_id, result) => {
+	dbConn.query('SELECT * FROM admin WHERE AdminId=1', admin_id, (err, res) => {
+		if (err) {
+			console.log('Error while fetching admin by id', err);
+			result(null, err);
+		} else {
 			console.log('Admin fetch is succesful');
-            result(null, res);
-        }
-    })
+			result(null, res);
+		}
+	})
 }
 
 Admin.getCounts = (result) => {
@@ -61,4 +61,63 @@ Admin.getCounts = (result) => {
 		}
 	});
 };
+
+Admin.editDetails = (data, result) => {
+	var email = data.email;
+	var fname = data.fname;
+	var lname = data.lname;
+
+	if (email !== '') {
+		if (fname !== '') {
+			if (lname !== '') {
+				var sql = "UPDATE admin SET Email='" + email + "' ,Fname='" + fname + "',Lname='" + lname + "' WHERE AdminId=1";
+			}
+			else {
+				var sql = "UPDATE admin SET Email='" + email + "' ,Fname='" + fname + "' WHERE AdminId=1";
+			}
+		}
+
+		else {
+			if (lname !== '') {
+				var sql = "UPDATE admin SET Email='" + email + "',Lname='" + lname + "' WHERE AdminId=1";
+			}
+			else {
+				var sql = "UPDATE admin SET Email='" + email + "' WHERE AdminId=1";
+			}
+		}
+	}
+
+	else {
+		if (fname !== '') {
+			if (lname !== '') {
+				var sql = "UPDATE admin SET Fname='" + fname + "',Lname='" + lname + "' WHERE AdminId=1";
+			}
+			else {
+				var sql = "UPDATE admin SET Fname='" + fname + "' WHERE AdminId=1";
+			}
+		}
+
+		else {
+			if (lname !== '') {
+				var sql = "UPDATE admin SET Lname='" + lname + "' WHERE AdminId=1";
+			}
+			else {
+				var sql = "";
+			}
+		}
+	}
+
+
+	console.log(sql);
+	dbConn.query(sql, function (err, res) {
+		if (err) {
+			console.log('Error while editing admin data');
+			result(null, err);
+		} else {
+			console.log('edited successfully');
+			result(null, res)
+		}
+	})
+}
+
 module.exports = Admin;
