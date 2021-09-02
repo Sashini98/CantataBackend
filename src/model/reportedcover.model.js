@@ -45,6 +45,19 @@ ReportedCover.getCoverCount = (result) => {
 	});
 };
 
+ReportedCover.changeStatus = (cover_id,result) => {
+
+	dbConn.query('UPDATE reportedcover SET Status=0 WHERE CoverId=?',cover_id, (err, res) => {
+		if (err) {
+			console.log("Error while changing status", err);
+			result(null, err);
+		} else {
+			console.log("Status changed", err);
+			result(null, res);
+		}
+	});
+};
+
 
 
 module.exports = ReportedCover;

@@ -31,3 +31,12 @@ exports.getCoverCount = (req, res) => {
 	});
 };
 
+exports.changeStatus = (req, res)=>{
+    // console.log('get replyric id');
+    ReportedCoversModel.changeStatus(req.params.cover_id, (err, repcover)=>{
+        if(err) res.send(err);		
+        // console.log('rep data',repuser);
+        res.send(repcover);
+    })
+}
+

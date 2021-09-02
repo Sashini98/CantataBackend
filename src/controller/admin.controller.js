@@ -64,5 +64,47 @@ exports.editDetails = (req, res) =>{
         })
     }
 }
+
+// exports.changePassword = (req, res) =>{
+//     const adminReqData = new AdminModel(req.body);
+//     console.log('notificationReqData', adminReqData);
+//     // check null
+//     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+//         res.send(400).send({success: false, message: 'Please fill all fields'});
+//     }else{
+//         AdminModel.changePassword(adminReqData, (err, admin)=>{
+//             if(err)
+//             res.send(err);
+//             res.json({status: true, message: 'Password Changed Successfully', data: admin})
+//         })
+//     }
+// // }
+
+// exports.changePassword = (req, res) => {
+// 	//console.log('get emp by id');
+// 	console.log(req.body);
+// 	AdminModel.changePassword(req.body, (err, admin) => {
+// 		// if (err) res.send(err);
+// 		// console.log("single user data", user);
+// 		if (err) {
+// 			res.status(404).send({ message: "failed", data: null });
+// 			return;
+// 		} else {
+// 			if (admin) {
+// 				res.status(200).send({ message: "success", data: admin[0] });
+// 			} else {
+// 				res.status(404).send({ message: "failed", data: null });
+// 			}
+// 		}
+// 	});
+// };
  
+exports.changePassword = (req, res)=>{
+    //console.log('get emp by id');
+    AdminModel.changePassword(req.body, (err, admin)=>{
+		if(err)
+		res.send(err);
+		res.json({status: true, message: 'Password Changed Successfully', data: admin})
+    })
+}
 

@@ -30,3 +30,13 @@ exports.getLyricCount = (req, res) => {
 		res.send(reports); 
 	});
 };
+
+exports.changeStatus = (req, res)=>{
+    // console.log('get replyric id');
+    ReportedLyricsModel.changeStatus(req.params.lyric_id, (err, replyric)=>{
+        if(err) res.send(err);		
+        // console.log('rep data',repuser);
+        res.send(replyric);
+    })
+}
+

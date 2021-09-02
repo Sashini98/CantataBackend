@@ -21,6 +21,7 @@ ReportedUser.getReportCount = (result) => {
 };
 
 ReportedUser.getReports = (user_id,result) => {
+
 	dbConn.query('SELECT ReportedBy,Reason FROM reportedusers WHERE UserId=?',user_id, (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported users", err);
@@ -39,6 +40,32 @@ ReportedUser.getRepUserCount = (result) => {
 			result(null, err);
 		} else {
 			console.log("Done", err);
+			result(null, res);
+		}
+	});
+};
+
+// ReportedUser.changeStatus = (user_id, result)=>{
+
+//     dbConn.query('UPDATE reportedusers SET Status=0 WHERE UserId=?', user_id, (err, res)=>{
+//         if(err){
+//             console.log('Error while changing status ', err);
+//             result(null, err);
+//         }else{
+// 			console.log('Status changed');
+//             result(null, res);
+//         }
+//     })
+// }
+ReportedUser.changeStatus = (user_id,result) => {
+	console.log('id'+user_id);
+
+	dbConn.query('UPDATE reportedusers SET Status=0 WHERE UserId=?',user_id, (err, res) => {
+		if (err) {
+			console.log("Error while changing status", err);
+			result(null, err);
+		} else {
+			console.log("Status changed", err);
 			result(null, res);
 		}
 	});

@@ -11,8 +11,8 @@ var Admin = function (admin) {
 // get user by id and password
 Admin.validate = (data, result) => {
 	dbConn.query(
-		"SELECT * FROM admin WHERE email= ? AND password= ?",
-		[data.email, data.password],
+		"SELECT * FROM admin WHERE AdminId= 1 AND password= ?",
+		[data.oldpass],
 		(err, res) => {
 			if (err) {
 				console.log("Admin not found");
@@ -119,5 +119,21 @@ Admin.editDetails = (data, result) => {
 		}
 	})
 }
+
+Admin.changePassword = (data, result) => {
+	dbConn.query(
+		"Update admin set password = ? where AdminId=1",
+		[data.newpass],
+		(err, res) => {
+			if (err) {
+				console.log("Password Change Failed");
+				result(err, null);
+			} else {
+				result(null, res);
+			}
+		}
+	);
+};
+
 
 module.exports = Admin;

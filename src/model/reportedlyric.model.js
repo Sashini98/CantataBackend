@@ -44,5 +44,18 @@ ReportedLyric.getLyricCount = (result) => {
 	});
 };
 
+ReportedLyric.changeStatus = (lyric_id,result) => {
+
+	dbConn.query('UPDATE reportedlyrics SET Status=0 WHERE LyricId=?',lyric_id, (err, res) => {
+		if (err) {
+			console.log("Error while changing status", err);
+			result(null, err);
+		} else {
+			console.log("Status changed", err);
+			result(null, res);
+		}
+	});
+};
+
 
 module.exports = ReportedLyric;

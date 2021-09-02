@@ -14,21 +14,29 @@ router.post("/addnotification", notificationController.createNotification);
 router.get('/getreplyriccount',reportedlyricController.getReportCount);
 router.get('/getlyriccounts',reportedlyricController.getLyricCount);
 router.get('/getreplyric/:lyric_id',reportedlyricController.getReportLyrics);
+router.get('/changelyricstatus/:lyric_id',reportedlyricController.changeStatus);
+
 
 router.get('/getrepuser/:user_id',reporteduserController.getReports);
 router.get('/getrepusercount',reporteduserController.getReportCount);
 router.get('/getusercounts',reporteduserController.getRepUserCount);
+router.get('/changestatus/:user_id',reporteduserController.changeStatus);
+
 
 
 router.get('/getrepcovercount',reportedcoverController.getReportCount);
 router.get('/getrepcover/:cover_id',reportedcoverController.getReportCover);
 router.get('/getcovercounts',reportedcoverController.getCoverCount);
+router.get('/changecoverstatus/:cover_id',reportedcoverController.changeStatus);
+
 
 
 router.post("/checkadmin", adminController.checkAdmin);
 router.get('/getadmin',adminController.getAdmin);
 router.get('/gettot',adminController.getCounts);
 router.post('/editdetails',adminController.editDetails);
+router.post("/changepassword", adminController.changePassword);
+
 
 
 

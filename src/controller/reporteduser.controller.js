@@ -7,7 +7,7 @@ exports.getReportCount = (req, res) => {
 	ReportedUserModel.getReportCount((err, reporteduser) => {
 		// console.log("We are here");
 		if (err) res.send(err);
-        console.log('rep cont data',reporteduser);
+        // console.log('rep cont data',reporteduser);
 		res.send(reporteduser); 
 	});
 };
@@ -16,7 +16,7 @@ exports.getReports = (req, res)=>{
     // console.log('get replyric id');
     ReportedUserModel.getReports(req.params.user_id, (err, repuser)=>{
         if(err) res.send(err);		
-        console.log('rep data',repuser);
+        // console.log('rep data',repuser);
         res.send(repuser);
     })
 }
@@ -30,3 +30,21 @@ exports.getRepUserCount = (req, res) => {
 		res.send(reports); 
 	});
 };
+
+// exports.changeStatus = (req, res)=>{
+//     // console.log('change stateee');
+//     ReportedUserModel.changeStatus(req.body, (err, reports)=>{
+// 		if(err)
+// 		res.send(err);
+//     })
+// }
+
+exports.changeStatus = (req, res)=>{
+    // console.log('get replyric id');
+    ReportedUserModel.changeStatus(req.params.user_id, (err, repuser)=>{
+        if(err) res.send(err);		
+        // console.log('rep data',repuser);
+        res.send(repuser);
+    })
+}
+
