@@ -48,38 +48,80 @@ exports.getDeactiveUsers = (req, res) => {
 	});
 };
 
-exports.getUserByEmail = (req, res)=>{
-    //console.log('get emp by id');
-    UserModel.getUserByEmail(req.params.email, (err, user)=>{
-        if(err)
-        res.send(err);
-		console.log(user)
-        res.send(user);
-    })
-}
+exports.getUserByEmail = (req, res) => {
+	//console.log('get emp by id');
+	UserModel.getUserByEmail(req.params.email, (err, user) => {
+		if (err) res.send(err);
+		console.log(user);
+		res.send(user);
+	});
+};
 
 exports.getUserCount = (req, res) => {
 	//console.log('here all employees list');
 	UserModel.getUserCount((err, usercnt) => {
 		// console.log("We are here");
 		if (err) res.send(err);
-        console.log('counts',usercnt);
+		console.log("counts", usercnt);
 		res.send(usercnt); //did some changes here
 	});
 };
 
-exports.activateUser = (req, res)=>{
-    //console.log('get emp by id');
-    UserModel.activateUser(req.params.email, (err, user)=>{
-        if(err)
-        res.send(err);
-    })
-}
+exports.activateUser = (req, res) => {
+	//console.log('get emp by id');
+	UserModel.activateUser(req.params.email, (err, user) => {
+		if (err) res.send(err);
+	});
+};
 
-exports.deactivateUser = (req, res)=>{
-    //console.log('get emp by id');
-    UserModel.deactivateUser(req.params.email, (err, user)=>{
-        if(err)
-        res.send(err);
-    })
-}
+exports.deactivateUser = (req, res) => {
+	//console.log('get emp by id');
+	UserModel.deactivateUser(req.params.email, (err, user) => {
+		if (err) res.send(err);
+	});
+};
+
+// Bhagya >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//Matches input email and password at login and validates user
+exports.checkUser = (req, res) => {
+	console.log(req.body);
+	UserModel.validate(req.body, (err, user) => {
+		if (err) {
+			res.status(200).send({ message: "failed", data: null });
+			console.log("oops");
+		} else {
+			if (user.length > 0) {
+				res.status(200).send({ message: "success", data: user[0] });
+			} else {
+				res.send({ message: "wrong", data: null });
+				console.log("Wrong combination");
+			}
+		}
+	});
+};
+
+//Register new user details
+exports.registerUser = (req, res) => {
+	UserModel.register(req.body, (err, user) => {
+		if (err) res.send(err);
+		res.status(200).send({ message: "New user registered successfully" });
+	});
+};
+
+//Insert new lyrics
+exports.inputLyrics = (req, res) => {
+	UserModel.inputLyrics(req.body, (err, user) => {
+		if (err) res.send(err);
+		res.status(200).send({ message: "New lyrics added successfully" });
+	});
+};
+
+//Get all lyric posts
+exports.getLyrics = (req, res) => {
+	UserModel.getLyrics((err, lyrics) => {
+		if (err) res.send(err);
+		console.log(lyrics);
+		res.status(200).send({ lyrics });
+	});
+};
