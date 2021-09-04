@@ -10,6 +10,8 @@ const reportedcoverController = require("../controller/reportedcover.controller"
 
 
 router.post("/addnotification", notificationController.createNotification);
+router.post("/addusernotification", notificationController.createUserNotification);
+
 
 router.get('/getreplyriccount',reportedlyricController.getReportCount);
 router.get('/getlyriccounts',reportedlyricController.getLyricCount);

@@ -16,3 +16,17 @@ exports.createNotification = (req, res) =>{
     }
 }
  
+exports.createUserNotification = (req, res) =>{
+    const notificationReqData = new NotificationModel(req.body);
+    console.log('notificationReqData', notificationReqData);
+    // check null
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.send(400).send({success: false, message: 'Please fill all fields'});
+    }else{
+        NotificationModel.createUserNotification(notificationReqData, (err, notification)=>{
+            if(err)
+            res.send(err);
+            res.json({status: true, message: 'Notification Created Successfully', data: notification.insertId})
+        })
+    }
+}
