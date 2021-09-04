@@ -9,7 +9,7 @@ var ReportedLyric = function (reportedlyric) {
 };
 
 ReportedLyric.getReportCount = (result) => {
-	dbConn.query("SELECT user.Email,reportedlyrics.LyricId,COUNT(reportedlyrics.LyricId) as Count FROM reportedlyrics JOIN lyrics ON reportedlyrics.LyricId=lyrics.LyricId JOIN user ON lyrics.UserId=user.UserId WHERE reportedlyrics.Status=1 GROUP BY reportedlyrics.LyricId", (err, res) => {
+	dbConn.query("SELECT user.Email,reportedlyrics.LyricId,lyrics.Title,COUNT(reportedlyrics.LyricId) as Count FROM reportedlyrics JOIN lyrics ON reportedlyrics.LyricId=lyrics.LyricId JOIN user ON lyrics.UserId=user.UserId WHERE reportedlyrics.Status=1 GROUP BY reportedlyrics.LyricId", (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported lyrics", err);
 			result(null, err);
@@ -21,7 +21,7 @@ ReportedLyric.getReportCount = (result) => {
 };
 
 ReportedLyric.getReportLyrics = (lyric_id,result) => {
-	dbConn.query("SELECT ReportedBy,Reason FROM reportedlyrics WHERE LyricId=?",lyric_id, (err, res) => {
+	dbConn.query("SELECT user.Email,reportedlyrics.Reason FROM reportedlyrics JOIN user ON reportedlyrics.ReportedBy=user.UserId WHERE LyricId=?",lyric_id, (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported lyrics", err);
 			result(null, err);

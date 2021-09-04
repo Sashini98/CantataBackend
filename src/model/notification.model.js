@@ -46,8 +46,18 @@ Notification.createNotification = (data, result) => {
 Notification.createUserNotification = (data, result) => {
     var notification_id = data.notification_id;
 
-    if (data.email === "") {
+    if (data.email === '') {
         var sql = "INSERT INTO user_has_notification (NotificationId) VALUES ('" + notification_id + "')";
+        console.log(sql);
+        dbConn.query(sql, function (err, res) {
+        if (err) {
+            console.log('Error while inserting data');
+            result(null, err);
+        } else {
+            console.log('Notification insterted successfully');
+            result(null, res)
+        }
+    })
 
     }
 

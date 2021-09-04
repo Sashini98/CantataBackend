@@ -9,7 +9,7 @@ var ReportedCover = function (reportedcover) {
 };
 
 ReportedCover.getReportCount = (result) => {
-	dbConn.query("SELECT user.Email,reportedcover.CoverId,COUNT(reportedcover.CoverId) as Count FROM reportedcover JOIN cover ON reportedcover.CoverId=cover.CoverId JOIN user ON cover.UserId=user.UserId WHERE reportedcover.Status=1 GROUP BY reportedcover.CoverId", (err, res) => {
+	dbConn.query("SELECT user.Email,reportedcover.CoverId,cover.Title,COUNT(reportedcover.CoverId) as Count FROM reportedcover JOIN cover ON reportedcover.CoverId=cover.CoverId JOIN user ON cover.UserId=user.UserId WHERE reportedcover.Status=1 GROUP BY reportedcover.CoverId", (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported cover", err);
 			result(null, err);
@@ -22,7 +22,7 @@ ReportedCover.getReportCount = (result) => {
 
 
 ReportedCover.getReportCover = (cover_id,result) => {
-	dbConn.query("SELECT ReportedBy,Reason FROM reportedcover WHERE CoverId=?",cover_id, (err, res) => {
+	dbConn.query("SELECT user.Email,reportedcover.Reason FROM reportedcover JOIN user ON reportedcover.ReportedBy=user.UserId WHERE CoverId?",cover_id, (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported covers", err);
 			result(null, err);
