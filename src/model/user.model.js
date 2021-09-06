@@ -151,8 +151,8 @@ User.validate = (data, result) => {
 //Register new user details >> Have to add more info to the table such as first name, etc.
 User.register = (data, result) => {
 	dbConn.query(
-		"INSERT INTO user (email, password, CreatedAt) VALUES (?,?, now())",
-		[data.new_email, data.new_password],
+		"INSERT INTO user (email, password, fname, lname, CreatedAt) VALUES (?,?,?,?, now())",
+		[data.new_email, data.new_password, data.fname, data.lname],
 		(err, res) => {
 			if (err) {
 				console.log("Error while registering", err);
