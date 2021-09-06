@@ -38,6 +38,8 @@ router.get('/getadmin',adminController.getAdmin);
 router.get('/gettot',adminController.getCounts);
 router.post('/editdetails',adminController.editDetails);
 router.post("/changepassword", adminController.changePassword);
+router.get('/getstats',adminController.getStats);
+
 
 
 

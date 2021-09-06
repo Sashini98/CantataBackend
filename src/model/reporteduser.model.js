@@ -22,7 +22,7 @@ ReportedUser.getReportCount = (result) => {
 
 ReportedUser.getReports = (user_id,result) => {
 
-	dbConn.query('SELECT ReportedBy,Reason FROM reportedusers WHERE UserId=?',user_id, (err, res) => {
+	dbConn.query('SELECT user.Email,reportedusers.Reason FROM reportedusers JOIN user ON reportedusers.ReportedBy=user.UserId WHERE reportedusers.UserId=?',user_id, (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported users", err);
 			result(null, err);
