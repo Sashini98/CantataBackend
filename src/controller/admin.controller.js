@@ -110,7 +110,27 @@ exports.changePassword = (req, res)=>{
 
 exports.getuserStats = (req, res) => {
 	//console.log('here all employees list');
-	AdminModel.getStats((err, stat) => {
+	AdminModel.getuserStats((err, stat) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        console.log('stats',stat);
+		res.send(stat); //did some changes here
+	});
+};
+
+exports.getcoverStats = (req, res) => {
+	//console.log('here all employees list');
+	AdminModel.getcoverStats((err, stat) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+        console.log('stats',stat);
+		res.send(stat); //did some changes here
+	});
+};
+
+exports.getlyricStats = (req, res) => {
+	//console.log('here all employees list');
+	AdminModel.getlyricStats((err, stat) => {
 		// console.log("We are here");
 		if (err) res.send(err);
         console.log('stats',stat);

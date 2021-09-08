@@ -136,7 +136,31 @@ Admin.changePassword = (data, result) => {
 };
 
 Admin.getuserStats = (result) => {
-	dbConn.query("SELECT  Months.m AS month, COUNT(user.CreatedAt) AS total FROM (SELECT 1 as m UNION SELECT 2 as m UNION SELECT 3 as m  UNION SELECT 4 as m UNION SELECT 5 as m UNION SELECT 6 as m UNION SELECT 7 as m UNION SELECT 8 as m UNION SELECT 9 as m UNION SELECT 10 as m UNION SELECT 11 as m UNION SELECT 12 AS m) as Months LEFT JOIN user  on Months.m = MONTH(user.CreatedAt) GROUP BY Months.m", (err, res) => {
+	dbConn.query("SELECT COUNT(user.CreatedAt) AS usercnt FROM (SELECT 1 as m UNION SELECT 2 as m UNION SELECT 3 as m  UNION SELECT 4 as m UNION SELECT 5 as m UNION SELECT 6 as m UNION SELECT 7 as m UNION SELECT 8 as m UNION SELECT 9 as m UNION SELECT 10 as m UNION SELECT 11 as m UNION SELECT 12 AS m) as Months LEFT JOIN user  on Months.m = MONTH(user.CreatedAt) GROUP BY Months.m", (err, res) => {
+		if (err) {
+			console.log("Error while fetching stats", err);
+			result(null, err);
+		} else {
+			console.log("Stats fetched succesfully", err);
+			result(null, res);
+		}
+	});
+};
+
+Admin.getcoverStats = (result) => {
+	dbConn.query("SELECT COUNT(cover.CreatedAt) AS covercnt FROM (SELECT 1 as m UNION SELECT 2 as m UNION SELECT 3 as m  UNION SELECT 4 as m UNION SELECT 5 as m UNION SELECT 6 as m UNION SELECT 7 as m UNION SELECT 8 as m UNION SELECT 9 as m UNION SELECT 10 as m UNION SELECT 11 as m UNION SELECT 12 AS m) as Months LEFT JOIN cover  on Months.m = MONTH(cover.CreatedAt) GROUP BY Months.m", (err, res) => {
+		if (err) {
+			console.log("Error while fetching stats", err);
+			result(null, err);
+		} else {
+			console.log("Stats fetched succesfully", err);
+			result(null, res);
+		}
+	});
+};
+
+Admin.getlyricStats = (result) => {
+	dbConn.query("SELECT COUNT(lyrics.CreatedAt) AS lyriccnt FROM (SELECT 1 as m UNION SELECT 2 as m UNION SELECT 3 as m  UNION SELECT 4 as m UNION SELECT 5 as m UNION SELECT 6 as m UNION SELECT 7 as m UNION SELECT 8 as m UNION SELECT 9 as m UNION SELECT 10 as m UNION SELECT 11 as m UNION SELECT 12 AS m) as Months LEFT JOIN lyrics  on Months.m = MONTH(lyrics.CreatedAt) GROUP BY Months.m", (err, res) => {
 		if (err) {
 			console.log("Error while fetching stats", err);
 			result(null, err);
