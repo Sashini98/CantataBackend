@@ -108,7 +108,7 @@ exports.changePassword = (req, res)=>{
     })
 }
 
-exports.getStats = (req, res) => {
+exports.getuserStats = (req, res) => {
 	//console.log('here all employees list');
 	AdminModel.getStats((err, stat) => {
 		// console.log("We are here");

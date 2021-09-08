@@ -135,8 +135,8 @@ Admin.changePassword = (data, result) => {
 	);
 };
 
-Admin.getStats = (result) => {
-	dbConn.query(" SELECT MONTHNAME(CONCAT('2021-',mon,'-1'))AS month, COALESCE(U.ct, 0) AS users, COALESCE(L.ct, 0) AS lyric, COALESCE(C.ct, 0) AS covers FROM(SELECT EXTRACT(MONTH FROM CreatedAt) AS mon, COUNT(user.UserId) AS ct FROM   user GROUP  BY mon) U LEFT JOIN (SELECT EXTRACT(MONTH FROM CreatedAt) AS mon,  COUNT(lyrics.LyricId)  AS ct FROM lyrics GROUP  BY mon) L USING (mon) LEFT JOIN (SELECT EXTRACT(MONTH FROM CreatedAt) AS mon, COUNT(cover.CoverId) AS ct FROM cover GROUP  BY mon) C USING (mon) ORDER  BY mon", (err, res) => {
+Admin.getuserStats = (result) => {
+	dbConn.query("SELECT  Months.m AS month, COUNT(user.CreatedAt) AS total FROM (SELECT 1 as m UNION SELECT 2 as m UNION SELECT 3 as m  UNION SELECT 4 as m UNION SELECT 5 as m UNION SELECT 6 as m UNION SELECT 7 as m UNION SELECT 8 as m UNION SELECT 9 as m UNION SELECT 10 as m UNION SELECT 11 as m UNION SELECT 12 AS m) as Months LEFT JOIN user  on Months.m = MONTH(user.CreatedAt) GROUP BY Months.m", (err, res) => {
 		if (err) {
 			console.log("Error while fetching stats", err);
 			result(null, err);
