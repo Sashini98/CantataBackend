@@ -112,6 +112,7 @@ exports.getuserStats = (req, res) => {
 		if (err) res.send(err);
         console.log('stats',stat);
 		res.send(stat); //did some changes here
+		
 	});
 };
 
