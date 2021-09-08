@@ -11,13 +11,14 @@ var Admin = function (admin) {
 // get user by id and password
 Admin.validate = (data, result) => {
 	dbConn.query(
-		"SELECT * FROM admin WHERE AdminId= 1 AND password= ?",
-		[data.oldpass],
+		"SELECT * FROM admin WHERE email= ? AND password= ?",
+		[data.email, data.password],
 		(err, res) => {
 			if (err) {
-				console.log("Admin not found");
+				console.log("Login query error");
 				result(err, null);
 			} else {
+				console.log("Login query successfull");
 				result(null, res);
 			}
 		}
@@ -38,6 +39,7 @@ Admin.checkAdmin = (user_id, result) => {
 		}
 	);
 };
+
 Admin.getAdmin = (admin_id, result) => {
 	dbConn.query('SELECT * FROM admin WHERE AdminId=1', admin_id, (err, res) => {
 		if (err) {

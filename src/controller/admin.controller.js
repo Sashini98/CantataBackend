@@ -12,24 +12,21 @@ const AdminModel = require("../model/admin.model");
 // }
 
 exports.checkAdmin = (req, res) => {
-	//console.log('get emp by id');
 	console.log(req.body);
 	AdminModel.validate(req.body, (err, admin) => {
-		// if (err) res.send(err);
-		// console.log("single user data", user);
 		if (err) {
-			res.status(404).send({ message: "failed", data: null });
-			return;
+			res.status(200).send({ message: "failed", data: null });
+			console.log("oops");
 		} else {
-			if (admin) {
+			if (admin.length > 0) {
 				res.status(200).send({ message: "success", data: admin[0] });
 			} else {
-				res.status(404).send({ message: "failed", data: null });
+				res.send({ message: "wrong", data: null });
+				console.log("Wrong combination");
 			}
 		}
 	});
 };
-
 exports.getAdmin= (req, res)=>{
     //console.log('get emp by id');
     AdminModel.getAdmin(req.params.admin_id, (err, admin)=>{
