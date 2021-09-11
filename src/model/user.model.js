@@ -1,4 +1,6 @@
 var dbConn = require("../../config/db.config");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 var User = function (user) {
 	this.user_id = user.user_id;
@@ -150,19 +152,25 @@ User.validate = (data, result) => {
 
 //Register new user details >> Have to add more info to the table such as first name, etc.
 User.register = (data, result) => {
-	dbConn.query(
-		"INSERT INTO user (email, password, fname, lname, CreatedAt) VALUES (?,?,?,?, now())",
-		[data.new_email, data.new_password, data.fname, data.lname],
-		(err, res) => {
-			if (err) {
-				console.log("Error while registering", err);
-				result(null, err);
-			} else {
-				console.log("Model -> Registered Successfully");
-				result(null, res);
-			}
+	bcrypt.hash(data.new_password, saltRounds, (err, hash) => {
+		if (err) {
+			console.log(err);
 		}
-	);
+
+		dbConn.query(
+			"INSERT INTO user (email, password, fname, lname, CreatedAt) VALUES (?,?,?,?, now())",
+			[data.new_email, hash, data.fname, data.lname],
+			(err, res) => {
+				if (err) {
+					console.log("Error while registering", err);
+					result(null, err);
+				} else {
+					console.log("Model -> Registered Successfully");
+					result(null, res);
+				}
+			}
+		);
+	});
 };
 
 User.inputLyrics = (data, result) => {
