@@ -136,14 +136,15 @@ User.deactivateUser = (email, result) => {
 //Validates user login >> Selects user with matching email and password
 User.validate = (data, result) => {
 	dbConn.query(
-		"SELECT * FROM user WHERE email= ? AND password= ?",
-		[data.email, data.password],
+		"SELECT * FROM user WHERE email= ?",
+		[data.email],
 		(err, res) => {
 			if (err) {
 				console.log("Login query error");
 				result(err, null);
 			} else {
 				console.log("Login query successfull");
+				// console.log(res[0].Password);
 				result(null, res);
 			}
 		}

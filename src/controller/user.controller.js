@@ -1,6 +1,7 @@
 const User = require("../model/user.model");
 const UserModel = require("../model/user.model");
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 // // get user by id and password
 // exports.checkUser = (req, res)=>{
 //         UserModel.checkUser(req.params.user_id, (err, employee)=>{
@@ -91,11 +92,23 @@ exports.checkUser = (req, res) => {
 			res.status(200).send({ message: "failed", data: null });
 			console.log("oops");
 		} else {
+			// console.log(req.body.password);
+			// console.log(user[0].Password);
 			if (user.length > 0) {
-				res.status(200).send({ message: "success", data: user[0] });
+				bcrypt.compare(
+					req.body.password,
+					user[0].Password,
+					(error, response) => {
+						if (response) {
+							res.status(200).send({ message: "success", data: user[0] });
+						} else {
+							res.send({ message: "wrong", data: null });
+						}
+					}
+				);
 			} else {
-				res.send({ message: "wrong", data: null });
-				console.log("Wrong combination");
+				console.log("User doesn't exist");
+				res.send({ message: "User doesn't exist", data: null });
 			}
 		}
 	});
