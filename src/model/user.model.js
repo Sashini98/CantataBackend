@@ -176,8 +176,8 @@ User.register = (data, result) => {
 
 User.inputLyrics = (data, result) => {
 	dbConn.query(
-		"INSERT INTO lyrics (Title, Description, UserId) VALUES (?,?, 5)",
-		[data.song_title, data.song_description],
+		"INSERT INTO lyrics (Title, Lyrics, Description, ActiveState, UserId) VALUES (?,?,?,1,?)",
+		[data.song_title, data.song_lyrics, data.song_description, data.author],
 		(err, res) => {
 			if (err) {
 				console.log("Error while inserting lyrics", err);
