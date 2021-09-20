@@ -84,6 +84,33 @@ User.getUserByEmail = (email, result) => {
 	});
 };
 
+// User.getUserById = (user_id, result) => {
+// 	dbConn.query("SELECT * FROM user WHERE UserId=?", user_id, (err, res) => {
+// 		if (err) {
+// 			console.log("Error while fetching user by id", err);
+// 			result(null, err);
+// 		} else {
+// 			console.log("User search is succesful");
+// 			result(null, res);
+// 		}
+// 	});
+// };
+
+User.getUserById = (user_id,result) => {
+	dbConn.query(
+		"SELECT * FROM user WHERE UserId=? ",user_id,
+		(err, res) => {
+			if (err) {
+				console.log("Error while fetching user", err);
+				result(null, err);
+			} else {
+				console.log("user fetched succesfully", err);
+				result(null, res);
+			}
+		}
+	);
+};
+
 User.getUserCount = (result) => {
 	dbConn.query(
 		"SELECT (SELECT COUNT(user.UserId) FROM user ) AS Users, (SELECT (SELECT COUNT(user.UserId) FROM user WHERE ActiveStatus=1)) AS Active, (SELECT (SELECT COUNT(user.UserId) FROM user WHERE ActiveStatus=0)) AS Deactive",

@@ -58,6 +58,26 @@ exports.getUserByEmail = (req, res) => {
 	});
 };
 
+// exports.getUserById = (req, res) => {
+// 	//console.log('get emp by id');
+// 	UserModel.getUserById(req.params.user_id, (err, user) => {
+// 		if (err) res.send(err);
+// 		console.log(user);
+// 		res.send(user);
+// 	});
+// };
+
+exports.getUserById = (req, res) => {
+    // console.log('get replyriccount');
+    UserModel.getUserById(req.params.user_id,(err, userdet) => {
+        // console.log("We are here");
+        if (err) res.send(err);
+        console.log('user data', userdet);
+        res.send(userdet);
+    });
+};
+
+
 exports.getUserCount = (req, res) => {
 	//console.log('here all employees list');
 	UserModel.getUserCount((err, usercnt) => {

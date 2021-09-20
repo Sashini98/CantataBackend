@@ -10,6 +10,8 @@ router.get("/usercount", userController.getUserCount);
 router.get("/searchUser/:email", userController.getUserByEmail);
 router.get("/activateUser/:email", userController.activateUser);
 router.get("/deactivateUser/:email", userController.deactivateUser);
+router.get("/getbyId/:user_id", userController.getUserById);
+
 
 //Bhagya >>>>
 

@@ -11,3 +11,13 @@ exports.getLyrics = (req, res) => {
         res.send(lyric);
     });
 };
+
+exports.getLyricsbyId = (req, res) => {
+    // console.log('get replyriccount');
+    LyricsModel.getLyricsbyId(req.params.lyric_id,(err, lyric) => {
+        // console.log("We are here");
+        if (err) res.send(err);
+        console.log('lyric data', lyric);
+        res.send(lyric);
+    });
+};

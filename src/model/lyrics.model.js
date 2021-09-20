@@ -25,6 +25,21 @@ Lyrics.getLyrics = (result) => {
 	);
 };
 
+Lyrics.getLyricsbyId = (lyric_id,result) => {
+	dbConn.query(
+		"SELECT * FROM lyrics JOIN user ON lyrics.UserId=user.UserId WHERE LyricId=? ",lyric_id,
+		(err, res) => {
+			if (err) {
+				console.log("Error while fetching lyrics", err);
+				result(null, err);
+			} else {
+				console.log("Lyrics fetched succesfully", err);
+				result(null, res);
+			}
+		}
+	);
+};
+
 // Lyrics.getCounts = (result) => {
 // 	dbConn.query(
 // 		"SELECT (SELECT COUNT(user.UserId) FROM user ) AS usercnt, (SELECT (SELECT COUNT(cover.CoverId) FROM cover)+(SELECT COUNT(lyrics.LyricId) FROM lyrics))  AS posts",
