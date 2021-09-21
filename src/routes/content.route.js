@@ -5,6 +5,6 @@ const lyricController = require("../controller/lyrics.controller");
 
 router.get("/getlyrics", lyricController.getLyrics);
 router.get("/getlyricsbyId/:lyric_id", lyricController.getLyricsbyId);
-
+router.post("/like", lyricController.putLike);
 
 module.exports = router;

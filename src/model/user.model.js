@@ -96,19 +96,16 @@ User.getUserByEmail = (email, result) => {
 // 	});
 // };
 
-User.getUserById = (user_id,result) => {
-	dbConn.query(
-		"SELECT * FROM user WHERE UserId=? ",user_id,
-		(err, res) => {
-			if (err) {
-				console.log("Error while fetching user", err);
-				result(null, err);
-			} else {
-				console.log("user fetched succesfully", err);
-				result(null, res);
-			}
+User.getUserById = (user_id, result) => {
+	dbConn.query("SELECT * FROM user WHERE UserId=? ", user_id, (err, res) => {
+		if (err) {
+			console.log("Error while fetching user", err);
+			result(null, err);
+		} else {
+			console.log("user fetched succesfully", err);
+			result(null, res);
 		}
-	);
+	});
 };
 
 User.getUserCount = (result) => {
