@@ -7,7 +7,7 @@ exports.getLyrics = (req, res) => {
     LyricsModel.getLyrics((err, lyric) => {
         // console.log("We are here");
         if (err) res.send(err);
-        console.log('lyric data', lyric);
+        // console.log('lyric data', lyric);
         res.send(lyric);
     });
 };
@@ -17,7 +17,7 @@ exports.getLyricsbyId = (req, res) => {
     LyricsModel.getLyricsbyId(req.params.lyric_id,(err, lyric) => {
         // console.log("We are here");
         if (err) res.send(err);
-        console.log('lyric data', lyric);
+        // console.log('lyric data', lyric);
         res.send(lyric);
     });
 };

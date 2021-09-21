@@ -202,13 +202,18 @@ User.register = (data, result) => {
 };
 
 User.inputLyrics = (data, result) => {
+	var currentdate = new Date();
+    var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
 	dbConn.query(
-		"INSERT INTO lyrics (Title, Preview, Lyrics, Description, ActiveState, UserId) VALUES (?,?,?,?,1,?)",
+		"INSERT INTO lyrics (Title, Preview, Lyrics, Description, CreatedAt, ActiveState, UserId) VALUES (?,?,?,?,?,1,?)",
 		[
 			data.song_title,
 			data.preview,
 			data.song_lyrics,
 			data.song_description,
+			datedet,
 			data.author,
 		],
 		(err, res) => {
