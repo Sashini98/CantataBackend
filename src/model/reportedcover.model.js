@@ -22,7 +22,7 @@ ReportedCover.getReportCount = (result) => {
 
 
 ReportedCover.getReportCover = (cover_id,result) => {
-	dbConn.query("SELECT user.Email,reportedcover.Reason FROM reportedcover JOIN user ON reportedcover.ReportedBy=user.UserId WHERE CoverId?",cover_id, (err, res) => {
+	dbConn.query("SELECT user.Email,reportedcover.Reason FROM reportedcover JOIN user ON reportedcover.ReportedBy=user.UserId WHERE CoverId=?",cover_id, (err, res) => {
 		if (err) {
 			console.log("Error while fetching reported covers", err);
 			result(null, err);

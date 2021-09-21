@@ -25,10 +25,11 @@ Notification.createNotification = (data, result) => {
     var sql = "INSERT INTO notification (Title, Message, AdminId, DateTime) VALUES ('" + title + "', '" + message + "' , '" + admin_id + "', '" + datedet + "')";
     dbConn.query(sql, function (err, res) {
         if (err) {
-            console.log('Error while inserting data');
+            console.log(sql);
+            console.log('Error while inserting data123');
             result(null, err);
         } else {
-            console.log('Notification insterted successfully');
+            console.log('Notification insterted successfully123');
             result(null, res)
         }
     })
@@ -51,11 +52,11 @@ Notification.createUserNotification = (data, result) => {
         console.log(sql);
         dbConn.query(sql, function (err, res) {
         if (err) {
-            console.log('Error while inserting data');
-            result(null, err);
+            console.log('Error while inserting data1');
+            return result(null, err);
         } else {
-            console.log('Notification insterted successfully');
-            result(null, res)
+            console.log('Notification insterted successfully1');
+            return result(null, res)
         }
     })
 
@@ -70,8 +71,8 @@ Notification.createUserNotification = (data, result) => {
 
             dbConn.query(sql1, function (err, res) {
                 if (err) {
-                    console.log('Error while inserting data');
-                    result(null, err);
+                    console.log('Error while inserting data2');
+                    return result(null, err);
                 } else {
                     let user;
                     user = res[0].UserId;
@@ -79,10 +80,10 @@ Notification.createUserNotification = (data, result) => {
 
                     dbConn.query(sql, function (err, res) {
                         if (err) {
-                            console.log('Error while inserting data');
+                            console.log('Error while inserting dataaaa');
                             result(null, err);
                         } else {
-                            console.log('Notification insterted successfully');
+                            console.log('Notification insterted successfullyyyy');
                             result(null, res)
                         }
                     })
