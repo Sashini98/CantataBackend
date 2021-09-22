@@ -25,15 +25,32 @@ Lyrics.getLyrics = (result) => {
 	);
 };
 
-Lyrics.getLyricsbyId = (lyric_id,result) => {
+Lyrics.getLyricsbyId = (lyric_id, result) => {
 	dbConn.query(
-		"SELECT * FROM lyrics JOIN user ON lyrics.UserId=user.UserId WHERE LyricId=? ",lyric_id,
+		"SELECT * FROM lyrics JOIN user ON lyrics.UserId=user.UserId WHERE LyricId=? ",
+		lyric_id,
 		(err, res) => {
 			if (err) {
 				console.log("Error while fetching lyrics", err);
 				result(null, err);
 			} else {
 				console.log("Lyrics fetched succesfully", err);
+				result(null, res);
+			}
+		}
+	);
+};
+
+Lyrics.putLike = (data, result) => {
+	dbConn.query(
+		"UPDATE lyrics SET likes=(?) WHERE LyricId=(?); INSERT INTO lyricrating (Likes, LyricId) VALUES (1,?)",
+		[data.number_of_likes, data.liked_post_id, data.liked_post_id],
+		(err, res) => {
+			if (err) {
+				console.log("Error while liking", err);
+				result(null, err);
+			} else {
+				console.log("Model -> Like Success");
 				result(null, res);
 			}
 		}
