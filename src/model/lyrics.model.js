@@ -42,8 +42,9 @@ Lyrics.getLyricsbyId = (lyric_id, result) => {
 };
 
 Lyrics.putLike = (data, result) => {
+	console.log(data);
 	dbConn.query(
-		"UPDATE lyrics SET likes=(?) WHERE LyricId=(?); INSERT INTO lyricrating (Liked, LyricId, UserId) VALUES (1,?)",
+		"UPDATE lyrics SET likes=(?) WHERE LyricId=(?); INSERT INTO lyricrating (Liked, LyricId, UserId) VALUES (1,?,?)",
 		[data.number_of_likes, data.liked_post_id, data.liked_post_id, data.UserId],
 		(err, res) => {
 			if (err) {
