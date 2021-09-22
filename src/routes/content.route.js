@@ -7,6 +7,7 @@ const coverController = require("../controller/cover.controller");
 router.get("/getlyrics", lyricController.getLyrics);
 router.get("/getlyricsbyId/:lyric_id", lyricController.getLyricsbyId);
 router.post("/like", lyricController.putLike);
+router.post("/comment", lyricController.addComment);
 
 router.post("/inputcover", coverController.inputCovers);
 router.post("/inputcovertag", coverController.inputCoverTags);

@@ -40,3 +40,10 @@ exports.changeStatus = (req, res)=>{
     })
 }
 
+exports.addReportedLyric = (req, res) => {
+    	ReportedLyricsModel.addReportedLyric(req.body, (err, replyric) => {
+		if (err) res.send(err);
+		// console.log("Report added successfully");
+		res.status(200).send({ message: "Report added successfully" });
+	});
+};

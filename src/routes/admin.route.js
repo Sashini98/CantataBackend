@@ -17,6 +17,7 @@ router.get('/getreplyriccount',reportedlyricController.getReportCount);
 router.get('/getlyriccounts',reportedlyricController.getLyricCount);
 router.get('/getreplyric/:lyric_id',reportedlyricController.getReportLyrics);
 router.get('/changelyricstatus/:lyric_id',reportedlyricController.changeStatus);
+router.post("/inputreplyric" , reportedlyricController.addReportedLyric);
 
 
 router.get('/getrepuser/:user_id',reporteduserController.getReports);

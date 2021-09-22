@@ -70,6 +70,27 @@ ReportedLyric.changeStatus = (lyric_id,result) => {
 	});
 };
 
+ReportedLyric.addReportedLyric = (data,result) => {
+	var currentdate = new Date();
+    var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
+	dbConn.query('INSERT INTO reportedlyrics (Reason, LyricId, ReportedBy, RepDate, Status) VALUES (?,?,?,?,1)',
+	[	data.reason,
+		data.lyric_id,
+		data.user,
+		datedet
+	]
+
+	, (err, res) => {
+		if (err) {
+			console.log("Error while inserting rep lyric", err);
+			result(null, err);
+		} else {
+			console.log("Rep Lyric Entered", err);
+			result(null, res);
+		}
+	});
+};
 
 module.exports = ReportedLyric;

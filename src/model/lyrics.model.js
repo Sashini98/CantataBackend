@@ -72,4 +72,24 @@ Lyrics.putLike = (data, result) => {
 // 	);
 // };
 
+Lyrics.addComment = (data, result) => {
+	var currentdate = new Date();
+    var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
+	dbConn.query(
+		"INSERT INTO lyriccomment (Comment, LyricId, CommentDate, UserId) VALUES (?,?,?,?)",
+		[data.comment, data.lyric_id, datedet, data.user],
+		(err, res) => {
+			if (err) {
+				console.log("Error while adding comment", err);
+				result(null, err);
+			} else {
+				console.log("Comment");
+				result(null, res);
+			}
+		}
+	);
+};
+
 module.exports = Lyrics;

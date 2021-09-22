@@ -6,7 +6,7 @@ exports.getLyrics = (req, res) => {
 	LyricsModel.getLyrics((err, lyric) => {
 		// console.log("We are here");
 		if (err) res.send(err);
-		console.log("lyric data", lyric);
+		// console.log("lyric data", lyric);
 		res.send(lyric);
 	});
 };
@@ -16,7 +16,7 @@ exports.getLyricsbyId = (req, res) => {
 	LyricsModel.getLyricsbyId(req.params.lyric_id, (err, lyric) => {
 		// console.log("We are here");
 		if (err) res.send(err);
-		console.log("lyric data", lyric);
+		// console.log("lyric data", lyric);
 		res.send(lyric);
 	});
 };
@@ -35,5 +35,13 @@ exports.putLike = (req, res) => {
 	LyricsModel.putLike(req.body, (err, user) => {
 		if (err) res.send(err);
 		res.status(200).send({ message: "Liked Successfully" });
+	});
+};
+
+exports.addComment = (req, res) => {
+	// console.log("We are at the controller");
+	LyricsModel.addComment(req.body, (err, comment) => {
+		if (err) res.send(err);
+		res.status(200).send({ message: "Commented Successfully" });
 	});
 };
