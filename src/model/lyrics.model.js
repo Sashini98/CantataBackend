@@ -43,8 +43,8 @@ Lyrics.getLyricsbyId = (lyric_id, result) => {
 
 Lyrics.putLike = (data, result) => {
 	dbConn.query(
-		"UPDATE lyrics SET likes=(?) WHERE LyricId=(?); INSERT INTO lyricrating (Likes, LyricId) VALUES (1,?)",
-		[data.number_of_likes, data.liked_post_id, data.liked_post_id],
+		"UPDATE lyrics SET likes=(?) WHERE LyricId=(?); INSERT INTO lyricrating (Liked, LyricId, UserId) VALUES (1,?)",
+		[data.number_of_likes, data.liked_post_id, data.liked_post_id, data.UserId],
 		(err, res) => {
 			if (err) {
 				console.log("Error while liking", err);
@@ -74,8 +74,18 @@ Lyrics.putLike = (data, result) => {
 
 Lyrics.addComment = (data, result) => {
 	var currentdate = new Date();
-    var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+	var datedet =
+		currentdate.getFullYear() +
+		"-" +
+		currentdate.getMonth() +
+		"-" +
+		currentdate.getDay() +
+		" " +
+		currentdate.getHours() +
+		":" +
+		currentdate.getMinutes() +
+		":" +
+		currentdate.getSeconds();
 
 	dbConn.query(
 		"INSERT INTO lyriccomment (Comment, LyricId, CommentDate, UserId) VALUES (?,?,?,?)",
