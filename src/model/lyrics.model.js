@@ -92,4 +92,20 @@ Lyrics.addComment = (data, result) => {
 	);
 };
 
+Lyrics.getComments = (lyric_id, result) => {
+	dbConn.query(
+		"SELECT * FROM lyriccomment JOIN user ON lyriccomment.UserId=user.UserId WHERE LyricId=? ",
+		lyric_id,
+		(err, res) => {
+			if (err) {
+				console.log("Error while fetching comments", err);
+				result(null, err);
+			} else {
+				console.log("Comments fetched succesfully", err);
+				result(null, res);
+			}
+		}
+	);
+};
+
 module.exports = Lyrics;

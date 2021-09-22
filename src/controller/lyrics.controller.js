@@ -45,3 +45,13 @@ exports.addComment = (req, res) => {
 		res.status(200).send({ message: "Commented Successfully" });
 	});
 };
+
+exports.getComments = (req, res) => {
+	// console.log('get replyriccount');
+	LyricsModel.getComments(req.params.lyric_id, (err, lyric) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+		// console.log("lyric data", lyric);
+		res.send(lyric);
+	});
+};
