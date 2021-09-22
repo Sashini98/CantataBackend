@@ -10,11 +10,13 @@ var Admin = function (admin) {
 
 // get user by id and password
 Admin.validate = (data, result) => {
-	dbConn.query(
-		"SELECT * FROM admin WHERE email= ? AND password= ?",
-		[data.email, data.password],
-		(err, res) => {
-			if (err) {
+	var email=data.emai;
+	var pass=data.oldpass;
+
+	var sql="SELECT * FROM admin WHERE email='"+email+"' AND password='"+pass+"'";
+	console.log(sql);
+	dbConn.query(sql, function (err, res) {
+		if (err) {
 				console.log("Login query error");
 				result(err, null);
 			} else {

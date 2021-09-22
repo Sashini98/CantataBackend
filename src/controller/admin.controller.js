@@ -17,7 +17,9 @@ exports.checkAdmin = (req, res) => {
 		if (err) {
 			res.status(200).send({ message: "failed", data: null });
 			console.log("oops");
-		} else {
+		} 
+		else {
+			console.log("ad"+admin);
 			if (admin.length > 0) {
 				res.status(200).send({ message: "success", data: admin[0] });
 			} else {
