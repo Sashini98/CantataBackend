@@ -40,3 +40,11 @@ exports.changeStatus = (req, res)=>{
     })
 }
 
+exports.addReportedCover = (req, res) => {
+    ReportedCoversModel.addReportedCover(req.body, (err, repcov) => {
+    if (err) res.send(err);
+    // console.log("Report added successfully");
+    res.status(200).send({ message: "Report added successfully" });
+});
+};
+

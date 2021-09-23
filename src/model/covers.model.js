@@ -120,4 +120,60 @@ Covers.inputCoverTags = (data, result) => {
 		});
 	}
 };
+
+
+Covers.addFav = (data, result) => {
+	
+	dbConn.query(
+		"INSERT INTO favourites (CoverId,UserId) VALUES (?, ?)",
+		[data.coverid, data.user],
+		(err, res) => {
+			if (err) {
+				console.log("Error while adding fav", err);
+				result(null, err);
+			} else {
+				console.log("Favourite");
+				result(null, res);
+			}
+		}
+	);
+};
+
+Covers.getFavs = (user_id, result) => {
+	var sql=	"SELECT * FROM favourites JOIN cover ON favourites.CoverId=cover.CoverId WHERE favourites.UserId='"+user_id+"' ";
+	console.log(sql);
+	dbConn.query(
+		"SELECT * FROM favourites JOIN cover ON favourites.CoverId=cover.CoverId WHERE favourites.UserId=? ",
+		user_id,
+		(err, res) => {
+			if (err) {
+				console.log("Error while fetching favs", err);
+				result(null, err);
+			} else {
+				console.log("favs fetched succesfully", err);
+				result(null, res);
+			}
+		}
+	);
+};
+
+Covers.removeFavs = (data, result) => {
+	var sql=	"DELETE FROM favourites WHERE FavouritesId='"+data.fav_id+"' ";
+	console.log(sql);
+	dbConn.query(
+		"DELETE FROM favourites WHERE FavouritesId=? ",
+		data.fav_id,
+		(err, res) => {
+			if (err) {
+				console.log("Error while del favs", err);
+				result(null, err);
+			} else {
+				console.log("favs del succesfully", err);
+				result(null, res);
+			}
+		}
+	);
+};
+
+
 module.exports = Covers;

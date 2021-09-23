@@ -58,6 +58,29 @@ ReportedCover.changeStatus = (cover_id,result) => {
 	});
 };
 
+ReportedCover.addReportedCover = (data,result) => {
+	var currentdate = new Date();
+    var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
+	dbConn.query('INSERT INTO reportedcover (Reason, CoverId, ReportedBy, RepDate, Status) VALUES (?,?,?,?,1)',
+	[	data.reason,
+		data.cover_id,
+		data.user,
+		datedet
+	]
+
+	, (err, res) => {
+		if (err) {
+			console.log("Error while inserting rep cov", err);
+			result(null, err);
+		} else {
+			console.log("Rep cov Entered", err);
+			result(null, res);
+		}
+	});
+};
+
 
 
 module.exports = ReportedCover;

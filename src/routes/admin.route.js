@@ -24,6 +24,8 @@ router.get('/getrepuser/:user_id',reporteduserController.getReports);
 router.get('/getrepusercount',reporteduserController.getReportCount);
 router.get('/getusercounts',reporteduserController.getRepUserCount);
 router.get('/changestatus/:user_id',reporteduserController.changeStatus);
+router.post("/inputrepuser" , reporteduserController.addReportedUser);
+
 
 
 
@@ -31,6 +33,8 @@ router.get('/getrepcovercount',reportedcoverController.getReportCount);
 router.get('/getrepcover/:cover_id',reportedcoverController.getReportCover);
 router.get('/getcovercounts',reportedcoverController.getCoverCount);
 router.get('/changecoverstatus/:cover_id',reportedcoverController.changeStatus);
+router.post("/inputrepcover" , reportedcoverController.addReportedCover);
+
 
 
 

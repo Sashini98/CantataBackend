@@ -14,5 +14,9 @@ router.post("/inputcover", coverController.inputCovers);
 router.post("/inputcovertag", coverController.inputCoverTags);
 router.get("/getcoverbyId/:cover_id", coverController.getcoverbyId);
 router.post("/getcovers", coverController.getCovers);
+router.post("/addfav", coverController.addFav);
+router.post("/removefav", coverController.removeFavs);
+router.get("/getfav/:user_id", coverController.getFavs);
+
 
 module.exports = router;

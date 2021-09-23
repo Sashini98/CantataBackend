@@ -53,3 +53,31 @@ exports.inputCoverTags = (req, res) => {
 		});
 	}
 };
+
+exports.addFav = (req, res) => {
+	// console.log("We are at the controller");
+	CoversModel.addFav(req.body, (err, fav) => {
+		if (err) res.send(err);
+		res.status(200).send({ message: "Added to favourites" });
+	});
+};
+
+exports.getFavs = (req, res) => {
+	// console.log('get replyriccount');
+	CoversModel.getFavs(req.params.user_id, (err, fav) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+		console.log("fav data", fav);
+		res.send(fav);
+	});
+};
+
+exports.removeFavs = (req, res) => {
+	// console.log('get replyriccount');
+	CoversModel.removeFavs(req.body, (err, fav) => {
+		// console.log("We are here");
+		if (err) res.send(err);
+		// console.log("fav data", fav);
+		res.send(fav);
+	});
+};

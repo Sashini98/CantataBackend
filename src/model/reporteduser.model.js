@@ -71,6 +71,28 @@ ReportedUser.changeStatus = (user_id,result) => {
 	});
 };
 
+ReportedUser.addReportedUser = (data,result) => {
+	var currentdate = new Date();
+    var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
+	dbConn.query('INSERT INTO reportedusers (Reason, UserId, ReportedBy, RepDate, Status) VALUES (?,?,?,?,1)',
+	[	data.reason,
+		data.user_id,
+		data.user,
+		datedet
+	]
+
+	, (err, res) => {
+		if (err) {
+			console.log("Error while inserting rep user", err);
+			result(null, err);
+		} else {
+			console.log("Rep user Entered", err);
+			result(null, res);
+		}
+	});
+};
 
 
 module.exports = ReportedUser;

@@ -48,3 +48,12 @@ exports.changeStatus = (req, res)=>{
     })
 }
 
+exports.addReportedUser = (req, res) => {
+    ReportedUserModel.addReportedUser(req.body, (err, repuser) => {
+    if (err) res.send(err);
+    // console.log("Report added successfully");
+    res.status(200).send({ message: "Report added successfully" });
+});
+};
+
+
