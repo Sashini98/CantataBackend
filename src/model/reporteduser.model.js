@@ -72,6 +72,7 @@ ReportedUser.changeStatus = (user_id,result) => {
 };
 
 ReportedUser.addReportedUser = (data,result) => {
+	console.log("model")
 	var currentdate = new Date();
     var datedet = currentdate.getFullYear() + "-" + currentdate.getMonth() + "-" + currentdate.getDay() + " " + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":" + currentdate.getSeconds();
